@@ -33,7 +33,7 @@ public class UserService implements UserDetailsService {
                 user.getUpdatedAt());
     }
 
-    public User getUserById(Long id) {
+    public User getUserById(Integer id) {
         return userRepository
                 .findById(Math.toIntExact(id))
                 .orElseThrow();
