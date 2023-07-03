@@ -1,9 +1,11 @@
 package com.leomouda.chatop.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,11 +15,20 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RentalResponseDTO {
-    private Integer owner_id;
-    private String name;
-    private Double price;
-    private Double surface;
-    private String picture;
-    private String description;
+    public Integer id;
+
+    public String name;
+
+    public double surface;
+
+    public double price;
+
+    public String description;
+
+    @JsonProperty("picture")
+    public String picture;
+
+    @JsonProperty("owner_id")
+    public Integer ownerId;
 }
 

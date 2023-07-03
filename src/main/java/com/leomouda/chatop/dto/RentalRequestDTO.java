@@ -13,12 +13,15 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RentalRequestDTO {
-    private Integer id;
     private String name;
-    private Double price;
-    private Double surface;
-    private MultipartFile picture;
+
+    private double surface;
+
+    private double price;
+
     private String description;
-    private LocalDateTime created_at;
-    private LocalDateTime update_at;
+
+    private MultipartFile picture;
+
+    private Integer ownerid;
 }
