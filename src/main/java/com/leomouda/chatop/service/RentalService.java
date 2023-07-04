@@ -79,13 +79,12 @@ public class RentalService {
                 .orElseThrow(() -> new RuntimeException("Utilisateur non trouvé"));
 
         return Rental.builder()
-                .id(dto.getOwnerid())
+                .owner(owner)
                 .name(dto.getName())
                 .description(dto.getDescription())
                 .surface(dto.getSurface())
                 .price(dto.getPrice())
                 .picture(fileUrl)
-                .owner(owner)
                 .build();
     }
 }

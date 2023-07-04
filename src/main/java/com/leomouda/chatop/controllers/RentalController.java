@@ -24,7 +24,8 @@ public class RentalController {
     private final FilesStorageService filesStorageService;
     private final AuthService authService;
 
-    @PostMapping("/{id}")
+
+    @PostMapping
     public ResponseEntity<RentalResponseDTO> create(@ModelAttribute("rental") RentalRequestDTO rentalRequestDTO, HttpServletRequest request) throws IOException, java.io.IOException, ServletException {
 
         System.out.println("///" + rentalRequestDTO.getName());
@@ -33,8 +34,6 @@ public class RentalController {
             UserResponseDTO currentUser = authService.getCurrentUser(request);
             rentalRequestDTO.setOwnerid(currentUser.getId());
             String fileUrl = filesStorageService.save(rentalRequestDTO.getPicture());
-
-
 
             return ResponseEntity.ok(rentalService.create(rentalRequestDTO,fileUrl));
         }
