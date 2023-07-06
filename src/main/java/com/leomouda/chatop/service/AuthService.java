@@ -45,7 +45,6 @@ public class AuthService {
     }
 
     public AuthResponseDTO authenticate(AuthRequestDTO request) {
-        System.out.println("/// " + request.getEmail());
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getEmail(),

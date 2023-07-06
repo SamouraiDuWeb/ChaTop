@@ -9,11 +9,14 @@ import com.leomouda.chatop.service.MessageService;
 import com.leomouda.chatop.service.RentalService;
 import com.leomouda.chatop.service.UserService;
 import io.jsonwebtoken.io.IOException;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +34,14 @@ public class MessageController {
 
     private final UserService userService;
 
+
+    @Operation(summary = "Ajouter un nouveau message",security = @SecurityRequirement(name = "bearerAuth"))
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Retourne le message créé",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = MessageResponseDTO.class)) }),
+            @ApiResponse(responseCode = "400", description = "Mauvaise requête - les informations fournies sont invalides"),
+            @ApiResponse(responseCode = "500", description = "Erreur interne du serveur") })
     @PostMapping()
     public ResponseEntity<MessageResponseDTO> addNewMessage(
             @RequestBody MessageRequestDTO newMessageDTO) throws IOException {
